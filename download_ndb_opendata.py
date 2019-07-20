@@ -41,12 +41,15 @@ def download_ndb_data(source):
 
     pwd = Path('.')
       
-    保存先ディレクトリ名 = source['name']
+    保存先ディレクトリ名 = os.path.join("data", source['name'])
     if not os.path.exists(pwd/保存先ディレクトリ名): 
         os.mkdir(pwd/保存先ディレクトリ名)
     
     @retry(stop_max_attempt_number=4, wait_exponential_multiplier=1000)
     def download_file(url, filename):
+        if(os.path.exists(filename)):
+            return
+
         r = requests.get(url, stream=True)
         assert r.ok
         with open(filename, 'wb') as f:
