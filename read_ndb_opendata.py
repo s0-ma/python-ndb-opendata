@@ -142,6 +142,9 @@ def get_dataframes(source, criteria):
 
 from collections import OrderedDict
 def get_dataframe(source, criteria):
+    if not source.startswith("data"):
+        source = os.path.join("data", source)
+
     dict_of_df = get_dataframes(source, criteria)
     if type(dict_of_df) is pandas.DataFrame:
         return dict_of_df
