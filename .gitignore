@@ -1,2 +1,6 @@
+*.py[cod]
+.ipynb_checkpoints
+__pycache__
+
 data/*
 !.keep
